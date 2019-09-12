@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     CharacterController controller;
     public GameObject Tracker;
 
-
     [Header("--Status PLayer--")]
     public float speed = 3.0F;
     public float rotateSpeed = 3.0F;
@@ -18,16 +17,19 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        if (!SceneManager.GetInstance().Camera.working || SceneManager.GetInstance().MiniGameActive)
+        if (!SceneManager.GetInstance().CameraPlayer.working || SceneManager.GetInstance().MiniGameActive)
             return;
         Move();
 
         if(InZoneMiniGame && Input.GetKeyDown(KeyCode.E)){
             this.gameObject.SetActive(false);
-            SceneManager.GetInstance().Camera.ChangeCameraMode(CameraFollowMode.FollowMiniGame);
+            SceneManager.GetInstance().CameraPlayer.ChangeCameraMode(CameraFollowMode.FollowMiniGame);
             SceneManager.GetInstance().MiniGameActive = true;
+            SceneManager.GetInstance().CanClick = true;
         }
-            
+
+       
+
     }
     static public PlayerController GetInstance()
     {

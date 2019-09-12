@@ -80,6 +80,11 @@ MonoBehaviour:
   ETrcker: {fileID: 1989078893944299921}
   E_TextPrefabs: {fileID: 4415608233117052020, guid: 80747aa970e30ca46a80755bd6bfa2dc,
     type: 3}
+  ID_MiniGame: MN001
+  GameData:
+    ID: 
+    FindItem: 
+    Reward: 
 --- !u!65 &1989078893766849524
 BoxCollider:
   m_ObjectHideFlags: 0
