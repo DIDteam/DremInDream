@@ -5,21 +5,32 @@ using UnityEngine;
 
 public class SceneManager : MonoBehaviour
 {
-    public PlayerStartPoint playerstartpoint;
+    //public PlayerStartPoint playerstartpoint;
+    private LayerMask LayerItem;
+    public Transform FirstFocus;
     public CameraFollowPlayer CameraPlayer;
-    public GameObject player;
+    //public GameObject player; 
+
+    public int CurrentMiniGame = 0;
+    public GameManagement GameManager;
+    
+    
     public SaveData PlayerData;
+
     public bool GameRunning = false;
-    public bool MiniGameActive = false;
+    //public bool MiniGameActive = false;
     public bool GamePause = false;
     public bool CanClick =false;
+
     void Start()
     {
         PlayerData = SaveSystem.LoadSaveGame();
-        playerstartpoint = GameObject.Find("PlayerStartPoint").GetComponent<PlayerStartPoint>();
+        //playerstartpoint = GameObject.Find("PlayerStartPoint").GetComponent<PlayerStartPoint>();
+        //FirstFocus = GameObject.Find("FirstFocusCamera").GetComponent<Transform>();
         CameraPlayer = GameObject.Find("Main Camera").GetComponent<CameraFollowPlayer>();
-        playerstartpoint.SpawnPlayer();
-        player = playerstartpoint.player;
+        GameManager = GameManagement.GetInstance();
+        //playerstartpoint.SpawnPlayer();
+        //player = playerstartpoint.player;
         StartCoroutine(SetupGame());
        
     }
@@ -31,30 +42,23 @@ public class SceneManager : MonoBehaviour
             return;
 
         MiniGameEvent();
-        
-        
-
-
     }
 
     private void MiniGameEvent()
     {
-        if (MiniGameActive && Input.GetKeyDown(KeyCode.Escape))
-        {
-            player.SetActive(true);
-            MiniGameActive = false;
-            CameraPlayer.ChangeCameraMode(CameraFollowMode.FollowPlayer);
-        }
-
-        if (MiniGameActive && CanClick && Input.GetMouseButtonDown(0))
+        if (CanClick && Input.GetMouseButtonDown(0))
         {
             CanClick = false;
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, 100.0f))
+            if (Physics.Raycast(ray, out hit, 1000.0f))
             {
+                
+                Debug.DrawRay(transform.position, hit.point , Color.green);
+                Debug.Log(hit.transform.gameObject);
                 ItemInteractiveGame Item = hit.transform.gameObject.GetComponent<ItemInteractiveGame>();
                 if (Item){
+                    
                     Debug.Log("You selected the " + Item.GameData.Name);
                     PlayerData.Inventory.Add(Item.ID_Item);
                     Destroy(Item.gameObject);
@@ -62,7 +66,7 @@ public class SceneManager : MonoBehaviour
                 //hit.transform.position += Vector3.right * speed * Time.deltaTime; // << declare public speed and set it in inspector
             }
         }
-        else if (MiniGameActive && !CanClick && Input.GetMouseButtonUp(0))
+        else if (!CanClick && Input.GetMouseButtonUp(0))
             CanClick = true;
     }
 
@@ -72,10 +76,24 @@ public class SceneManager : MonoBehaviour
     }
     IEnumerator SetupGame()
     {
-     
         yield return new WaitForSeconds(2.0f);
-        CameraPlayer.SetupCamera(player.transform, player.GetComponent<PlayerController>().Tracker);
+        CameraPlayer.SetTargetCamera(GameManager.ListGame[CurrentMiniGame].TrckerCamera.transform);
         GameRunning = true;
     }
 
+    public void LeftButton()
+    {
+        CameraPlayer.distanceFromObject = 50.0f;
+        CurrentMiniGame--;
+        CurrentMiniGame = Mathf.Clamp(CurrentMiniGame,0,GameManager.ListGame.Count-1);
+        CameraPlayer.SetTargetCamera(GameManager.ListGame[CurrentMiniGame].TrckerCamera.transform);
+    }
+
+    public void RightButton()
+    {
+        CameraPlayer.distanceFromObject = 6.0f;
+        CurrentMiniGame++;
+        CurrentMiniGame = Mathf.Clamp(CurrentMiniGame,0,GameManager.ListGame.Count-1);
+        CameraPlayer.SetTargetCamera(GameManager.ListGame[CurrentMiniGame].TrckerCamera.transform);
+    }
 }

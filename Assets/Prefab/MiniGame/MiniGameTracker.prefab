@@ -40,7 +40,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1989078893766849522}
   - component: {fileID: 1989078893766849523}
-  - component: {fileID: 1989078893766849524}
   m_Layer: 0
   m_Name: MiniGameTracker
   m_TagString: Untagged
@@ -83,21 +82,8 @@ MonoBehaviour:
   ID_MiniGame: MN001
   GameData:
     ID: 
-    FindItem: 
+    FindItem: []
     Reward: 
---- !u!65 &1989078893766849524
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1989078893766849525}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1989078893944299922
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,11 +137,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1989078895248964472}
-  m_LocalRotation: {x: 0.067774415, y: -0.6395052, z: 0.056753688, w: 0.7636877}
-  m_LocalPosition: {x: 0.4299998, y: 0.4, z: 0.4259996}
+  m_LocalRotation: {x: -0.07352146, y: 0.82249653, z: -0.1446378, w: -0.54513675}
+  m_LocalPosition: {x: 0.949, y: 0.689, z: 0.686}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 427981982}
   m_Father: {fileID: 1989078893766849522}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 10.143, y: -79.885, z: 0}
+  m_LocalEulerAnglesHint: {x: 18.547, y: 247.43399, z: 2.2220001}

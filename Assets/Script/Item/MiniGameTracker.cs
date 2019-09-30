@@ -9,8 +9,8 @@ public class MiniGameTracker : MonoBehaviour
     public GameObject TrckerCamera;
     public Transform ETrcker;
     public GameObject E_TextPrefabs;
-    GameObject E_ui;
-    Image E_UIimg;
+    //GameObject E_ui;
+    //Image E_UIimg;
     [Header("--Mini Game Setting--")]
     public string ID_MiniGame;
     public MiniGameTable.Row GameData;
@@ -34,34 +34,8 @@ public class MiniGameTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (E_ui)
-        {
-            if (E_ui.activeSelf)
-                E_UIimg.transform.position = Camera.main.WorldToScreenPoint(ETrcker.position);
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.GetComponent<PlayerController>())
-        {
-            PlayerController.GetInstance().InZoneMiniGame = true;
-            SceneManager.GetInstance().CameraPlayer.SetTargetMode(CameraFollowMode.FollowMiniGame,TrckerCamera.transform);
-            if (!E_ui)
-            {
-                E_ui = Instantiate(E_TextPrefabs, FindObjectOfType<Canvas>().transform);
-                E_UIimg = E_ui.GetComponent<Image>();
-            }else{
-                E_ui.SetActive(true);
-            }
-        }
-
 
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (E_ui)
-            E_ui.SetActive(false);
-        PlayerController.GetInstance().InZoneMiniGame = true;
-    }
+
+
 }

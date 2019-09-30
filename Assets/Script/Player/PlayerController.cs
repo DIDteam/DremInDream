@@ -17,14 +17,14 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        if (!SceneManager.GetInstance().CameraPlayer.working || SceneManager.GetInstance().MiniGameActive)
+        if (!SceneManager.GetInstance().CameraPlayer.working)
             return;
         Move();
 
         if(InZoneMiniGame && Input.GetKeyDown(KeyCode.E)){
             this.gameObject.SetActive(false);
-            SceneManager.GetInstance().CameraPlayer.ChangeCameraMode(CameraFollowMode.FollowMiniGame);
-            SceneManager.GetInstance().MiniGameActive = true;
+            //SceneManager.GetInstance().CameraPlayer.ChangeCameraMode(CameraFollowMode.FollowMiniGame);
+            //SceneManager.GetInstance().MiniGameActive = true;
             SceneManager.GetInstance().CanClick = true;
         }
 

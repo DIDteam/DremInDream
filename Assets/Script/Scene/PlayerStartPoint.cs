@@ -22,7 +22,7 @@ public class PlayerStartPoint : MonoBehaviour
 
     public void SpawnPlayer()
     {
-        Debug.Log("Spawn Player");
-        player = Instantiate(PrefabPlayer, SpawnPoint.transform);
+        //Debug.Log("Spawn Player");
+       // player = Instantiate(PrefabPlayer, SpawnPoint.transform);
     }
 }
