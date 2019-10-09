@@ -1,3 +1,25 @@
-﻿ID,Name,MeshPath,ImagePath
-ITEM001,pen,,
-ITEM002,book,,
+﻿ID,Name,MeshPath,model,ImagePath,,
+ITEM001,box_close_new,,,,,box_close เอา key_new มาใส่ แล้วกลายเป็น box_open
+ITEM002,box_open_new,,,,,ลาก key มาใส่
+ITEM003,key_new,,,,,(อยู่ในช่อง bar ข้างล่าง)
+ITEM004,book_01,,,,,กดแล้วหาย
+ITEM005,A4_02,,,,,กดแล้วหาย
+ITEM006,glass,,,,,กดแล้วหาย
+ITEM007,letter,,,,,กดแล้วหาย
+ITEM008,pencil,,,,,กดแล้วหาย
+ITEM009,sword,,,,,กดแล้วหาย
+ITEM010,pingpong,,,,,กดแล้วหาย
+ITEM011,beseball,,,,,กดแล้วหาย
+ITEM012,skateboard,,,,,กดแล้วหาย
+ITEM013,ball5,,,,,กดแล้วหาย
+ITEM014,award,,,,,ขึ้น pop up ตอนได้รับ
+ITEM015,staircase_02,,,,,staircase_02 ลาก wood มาใส่ แล้วกลายเป็น staircase_01
+ITEM016,staircase_01,,,,,อยู่ในช่อง bar ข้างล่าง
+ITEM017,wood,,,,,อยู่ในช่อง bar ข้างล่าง
+ITEM018,ruler,,,,,กดแล้วหาย
+ITEM019,tack,,,,,กดแล้วหาย
+ITEM020,tape,,,,,กดแล้วหาย
+ITEM021,doll_bear,,,,,ขึ้น pop up ตอนได้รับ / ภาพตอนทำ puzzle : กดตามจุด
+ITEM022,draw,,,,,ขึ้น pop up ตอนได้รับ / ภาพตอนทำ puzzle : เอาภาพมาเรียง
+ITEM023,Eraser,,,,,
+ITEM024,Pen,,,,,
