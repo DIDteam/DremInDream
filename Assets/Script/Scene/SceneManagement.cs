@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneManager : MonoBehaviour
+public class SceneManagement : MonoBehaviour
 {
     //public PlayerStartPoint playerstartpoint;
     private LayerMask LayerItem;
@@ -70,9 +70,9 @@ public class SceneManager : MonoBehaviour
             CanClick = true;
     }
 
-    static public SceneManager GetInstance()
+    static public SceneManagement GetInstance()
     {
-        return (SceneManager)FindObjectOfType(typeof(SceneManager));
+        return (SceneManagement)FindObjectOfType(typeof(SceneManagement));
     }
     IEnumerator SetupGame()
     {

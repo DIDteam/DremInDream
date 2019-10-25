@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class UI_MainMenuManager : MonoBehaviour
 {
@@ -19,8 +19,8 @@ public class UI_MainMenuManager : MonoBehaviour
     
     public void StartButton()
     {
-        EditorSceneManager.LoadScene("Gameplay");
-        EditorSceneManager.LoadScene("Map01", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        SceneManager.LoadScene("Gameplay");
+        SceneManager.LoadScene("Map01", UnityEngine.SceneManagement.LoadSceneMode.Additive);
     }
     
 }

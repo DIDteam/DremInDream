@@ -40,11 +40,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 4380770211528247779}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 916ff8b886ded8a4f892b8359cd6d8ad, type: 3}
+  m_Script: {fileID: 11500000, guid: a4afe12a6a558544d8beefc061e646d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerstartpoint: {fileID: 0}
-  Camera: {fileID: 0}
-  player: {fileID: 0}
+  FirstFocus: {fileID: 0}
+  CameraPlayer: {fileID: 0}
+  CurrentMiniGame: 0
+  GameManager: {fileID: 0}
+  PlayerData:
+    Name: None
+    Inventory: []
+    LastPosition: {fileID: 0}
   GameRunning: 0
   GamePause: 0
+  CanClick: 0
