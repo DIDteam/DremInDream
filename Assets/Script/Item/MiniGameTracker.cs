@@ -15,6 +15,10 @@ public class MiniGameTracker : MonoBehaviour
     public string ID_MiniGame;
     public MiniGameTable.Row GameData;
 
+    [Header("--Step Camera Setting--")]
+    public MiniGameTracker BackStepCamera;
+    public MiniGameTracker[] NextStepCamera;
+
     MiniGameTable Table = new MiniGameTable();
     TextAsset File;
     private void Awake()

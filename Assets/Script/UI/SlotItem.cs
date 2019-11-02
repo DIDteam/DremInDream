@@ -11,8 +11,8 @@ public class SlotItem : MonoBehaviour
     public string ID_Item;
     public ItemsTable.Row GameData;
 
-    Text TextName;
-    Image IMG;
+    public Text TextName;
+    public Image IMG;
     ItemsTable Table = new ItemsTable();
     TextAsset FileAsset;
 
@@ -20,9 +20,8 @@ public class SlotItem : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-       
+        IMG = GetComponentInChildren<Image>();
         TextName = GetComponentInChildren<Text>(true);
-        IMG = GetComponent<Image>();
     }
     void Start()
     {

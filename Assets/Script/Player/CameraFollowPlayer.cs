@@ -9,6 +9,12 @@ public enum CameraFollowMode
     FollowMiniGame,
     FollowMap
 }
+public enum StateCamera
+{
+    GameManager,
+    MiniGame,
+    Puzzle
+}
 public class CameraFollowPlayer : MonoBehaviour
 {
 
@@ -16,7 +22,9 @@ public class CameraFollowPlayer : MonoBehaviour
     
     public Transform TargetObject;
     public float distanceFromObject = 6f;
-   
+    public StateCamera state;
+    
+
     void Update()
     {
         if(!working && TargetObject != null)
@@ -45,5 +53,9 @@ public class CameraFollowPlayer : MonoBehaviour
         TargetObject = trans;
     }
     
+    public void SetStateCamera(StateCamera newstate)
+    {
+        state = newstate;
+    }
     
 }

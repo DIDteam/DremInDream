@@ -2,21 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SceneManagement : MonoBehaviour
 {
     //public PlayerStartPoint playerstartpoint;
     private LayerMask LayerItem;
+    public GameObject BackButton_UI;
     public Transform FirstFocus;
     public CameraFollowPlayer CameraPlayer;
     //public GameObject player; 
-
-    public int CurrentMiniGame = 0;
+    public MiniGameTracker CurrentMiniGame ;
     public GameManagement GameManager;
-    
-    
     public SaveData PlayerData;
-
     public bool GameRunning = false;
     //public bool MiniGameActive = false;
     public bool GamePause = false;
@@ -56,10 +54,30 @@ public class SceneManagement : MonoBehaviour
                 
                 Debug.DrawRay(transform.position, hit.point , Color.green);
                 Debug.Log(hit.transform.gameObject);
-                ItemInteractiveGame Item = hit.transform.gameObject.GetComponent<ItemInteractiveGame>();
-                if (Item)
+                GameObject obj = hit.transform.gameObject;
+
+                if (obj.GetComponent<ItemInteractiveGame>() && CameraPlayer.state == StateCamera.MiniGame)
                 {
-                    KeepItemtoInventory(Item);
+                    KeepItemtoInventory(obj.GetComponent<ItemInteractiveGame>());
+                }
+                else if (obj.GetComponent<MiniGameTracker>() )
+                {
+                    BackButton_UI.SetActive(true);
+
+                    if (CameraPlayer.state == StateCamera.GameManager)
+                    {
+                        CurrentMiniGame = obj.GetComponent<MiniGameTracker>();
+                        CurrentMiniGame.GetComponent<BoxCollider>().enabled = false;
+                        CameraPlayer.SetStateCamera(StateCamera.MiniGame);
+                        CameraPlayer.SetTargetCamera(obj.GetComponent<MiniGameTracker>().TrckerCamera.transform);
+                    }
+                    else if(CameraPlayer.state == StateCamera.MiniGame)
+                    {
+                        CurrentMiniGame.GetComponent<BoxCollider>().enabled = true;
+                        CurrentMiniGame = obj.GetComponent<MiniGameTracker>();
+                        CameraPlayer.SetStateCamera(StateCamera.MiniGame);
+                        CameraPlayer.SetTargetCamera(CurrentMiniGame.TrckerCamera.transform);
+                    }
                 }
                 //hit.transform.position += Vector3.right * speed * Time.deltaTime; // << declare public speed and set it in inspector
             }
@@ -68,12 +86,19 @@ public class SceneManagement : MonoBehaviour
             CanClick = true;
     }
 
-    private void KeepItemtoInventory(ItemInteractiveGame Item)
+    public void KeepItemtoInventory(ItemInteractiveGame Item)
     {
         Debug.Log("You selected the " + Item.GameData.Name);
         PlayerData.Inventory.Add(Item.ID_Item);
         InventoryManager.GetInstance().AddItem(Item.ID_Item);
         Destroy(Item.gameObject);
+    }
+
+    public void DropItemformInventory(string ItemID)
+    {
+        Debug.Log("You Drop Item : " + ItemID);
+        PlayerData.Inventory.Remove(ItemID);
+        InventoryManager.GetInstance().RemoveItem(ItemID);
     }
 
     static public SceneManagement GetInstance()
@@ -83,23 +108,34 @@ public class SceneManagement : MonoBehaviour
     IEnumerator SetupGame()
     {
         yield return new WaitForSeconds(2.0f);
-        CameraPlayer.SetTargetCamera(GameManager.ListGame[CurrentMiniGame].TrckerCamera.transform);
+        CameraPlayer.SetTargetCamera(GameManager.transform);
         GameRunning = true;
     }
 
-    public void LeftButton()
+    public void BackButton()
     {
-        CameraPlayer.distanceFromObject = 50.0f;
-        CurrentMiniGame--;
-        CurrentMiniGame = Mathf.Clamp(CurrentMiniGame,0,GameManager.ListGame.Count-1);
-        CameraPlayer.SetTargetCamera(GameManager.ListGame[CurrentMiniGame].TrckerCamera.transform);
+        if (CameraPlayer.state == StateCamera.MiniGame)
+        {
+            if (CurrentMiniGame.BackStepCamera != null)
+            {
+                Debug.Log("BackButton : BackStepCamera");
+                CurrentMiniGame.GetComponent<BoxCollider>().enabled = true;
+                CameraPlayer.SetTargetCamera(CurrentMiniGame.BackStepCamera.TrckerCamera.transform);
+                CurrentMiniGame = CurrentMiniGame.BackStepCamera;
+            }
+            else
+            {
+                Debug.Log("You Drop Item : BackStepCamera null ");
+                BackButton_UI.SetActive(false);
+                CurrentMiniGame.GetComponent<BoxCollider>().enabled = true;
+                CameraPlayer.SetStateCamera(StateCamera.GameManager);
+                CameraPlayer.SetTargetCamera(GameManager.transform);
+            }
+        }
+        else if (CameraPlayer.state == StateCamera.GameManager)
+        {
+            Debug.Log("BackButton : GameManager");
+        }
     }
 
-    public void RightButton()
-    {
-        CameraPlayer.distanceFromObject = 6.0f;
-        CurrentMiniGame++;
-        CurrentMiniGame = Mathf.Clamp(CurrentMiniGame,0,GameManager.ListGame.Count-1);
-        CameraPlayer.SetTargetCamera(GameManager.ListGame[CurrentMiniGame].TrckerCamera.transform);
-    }
 }
