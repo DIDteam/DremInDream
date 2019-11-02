@@ -57,17 +57,23 @@ public class SceneManagement : MonoBehaviour
                 Debug.DrawRay(transform.position, hit.point , Color.green);
                 Debug.Log(hit.transform.gameObject);
                 ItemInteractiveGame Item = hit.transform.gameObject.GetComponent<ItemInteractiveGame>();
-                if (Item){
-                    
-                    Debug.Log("You selected the " + Item.GameData.Name);
-                    PlayerData.Inventory.Add(Item.ID_Item);
-                    Destroy(Item.gameObject);
+                if (Item)
+                {
+                    KeepItemtoInventory(Item);
                 }
                 //hit.transform.position += Vector3.right * speed * Time.deltaTime; // << declare public speed and set it in inspector
             }
         }
         else if (!CanClick && Input.GetMouseButtonUp(0))
             CanClick = true;
+    }
+
+    private void KeepItemtoInventory(ItemInteractiveGame Item)
+    {
+        Debug.Log("You selected the " + Item.GameData.Name);
+        PlayerData.Inventory.Add(Item.ID_Item);
+        InventoryManager.GetInstance().AddItem(Item.ID_Item);
+        Destroy(Item.gameObject);
     }
 
     static public SceneManagement GetInstance()
