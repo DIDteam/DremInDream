@@ -8,11 +8,10 @@ public class ItemsTable
     [System.Serializable]
 	public class Row
 	{
-		public string ID;
-		public string Name;
-		public string MeshPath;
-		public string ImagePath;
-
+		public string ID = "";
+		public string Name = "";
+        public string MeshPath = "";
+        public string ImagePath = "";
 	}
 
 	List<Row> rowList = new List<Row>();
