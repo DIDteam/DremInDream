@@ -1,25 +1,24 @@
-ID	Name	MeshPath	model	ImagePath		
-ITEM001	box_close_new					box_close ??? key_new ????? ???????????? box_open
-ITEM002	box_open_new					??? key ?????
-ITEM003	key_new					(?????????? bar ????????)
-ITEM004	book_01					?????????
-ITEM005	A4_02					?????????
-ITEM006	glass					?????????
-ITEM007	letter					?????????
-ITEM008	pencil					?????????
-ITEM009	sword					?????????
-ITEM010	pingpong					?????????
-ITEM011	beseball					?????????
-ITEM012	skateboard					?????????
-ITEM013	ball5					?????????
-ITEM014	award					???? pop up ?????????
-ITEM015	staircase_02					staircase_02 ??? wood ????? ???????????? staircase_01
-ITEM016	staircase_01					?????????? bar ????????
-ITEM017	wood					?????????? bar ????????
-ITEM018	ruler					?????????
-ITEM019	tack					?????????
-ITEM020	tape					?????????
-ITEM021	doll_bear					???? pop up ????????? / ???????? puzzle : ????????
-ITEM022	draw					???? pop up ????????? / ???????? puzzle : ?????????????
-ITEM023	Eraser					
-ITEM024	Pen					
+ID,Name,MeshPath,model,ImagePath
+ITEM001,Animation_Box,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(1)_box,
+ITEM002,key,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(2)_teble,C:\Users\Chanl\Documents\DremInDream\Assets\UI\item
+ITEM003,pen,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(2)_teble,
+ITEM004,pencil,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(2)_teble,
+ITEM005,A4_Wrinkled,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(2)_teble,
+ITEM006,letter,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(2)_teble,
+ITEM007,glass,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(2)_teble,
+ITEM008,book_close,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(2)_teble,
+ITEM009,eraser,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(2)_teble,
+ITEM010,clip,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(2)_teble,
+ITEM011,baseball,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(1)_box,
+ITEM012,sword,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(1)_box,
+ITEM013,skateboard,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(1)_box,
+ITEM014,pingpong1,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(1)_box,
+ITEM015,gamejoy,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(1)_box,
+ITEM016,ball,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(1)_box,
+ITEM017,award,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(1)_box,C:\Users\Chanl\Documents\DremInDream\Assets\UI\item
+ITEM018,staircase_good,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(4)_staircase,C:\Users\Chanl\Documents\DremInDream\Assets\UI\item
+ITEM019,dollbear,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(8)_dollbear,C:\Users\Chanl\Documents\DremInDream\Assets\UI\item
+ITEM020,draw,,C:\Users\Chanl\Documents\DremInDream\Assets\model\(9)_draw,C:\Users\Chanl\Documents\DremInDream\Assets\UI\item
+ITEM021,dollbearsew,,,C:\Users\Chanl\Documents\DremInDream\Assets\UI\item
+ITEM022,,,,
+ITEM023,,,,
