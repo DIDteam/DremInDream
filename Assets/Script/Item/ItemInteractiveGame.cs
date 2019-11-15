@@ -13,17 +13,17 @@ public class ItemInteractiveGame : MonoBehaviour
     TextAsset File;
     private void Awake()
     {
+
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
         StreamReader reader = new StreamReader("Assets/CSV/AllItems.csv");
         File = new TextAsset(reader.ReadToEnd());
         Table.Load(File);
         Debug.Log(File.text);
         GameData = Table.Find_ID(ID_Item);
         reader.Close();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame

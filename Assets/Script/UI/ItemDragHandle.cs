@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class ItemDragHandle : MonoBehaviour , IDragHandler , IEndDragHandler
 {
+    public SlotItem parentItem;
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = Input.mousePosition;
@@ -13,12 +14,26 @@ public class ItemDragHandle : MonoBehaviour , IDragHandler , IEndDragHandler
     public void OnEndDrag(PointerEventData eventData)
     {
         transform.localPosition = Vector3.zero;
-    }
 
-    // Start is called before the first frame update
+        RaycastHit hit = new RaycastHit();
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, 1000.0f))
+        {
+            Debug.DrawRay(transform.position, hit.point, Color.green);
+            //Debug.Log(hit.transform.gameObject);
+            MissionItemInterActive Item = hit.transform.gameObject.GetComponent<MissionItemInterActive>();
+            Debug.Log(Item.ItemMissionComplete + "==" + parentItem.ID_Item);
+            if (Item.ItemMissionComplete == parentItem.ID_Item)
+            {
+                Item.UnlockMisstion();
+                SceneManagement.GetInstance().DropItemformInventory(Item.ItemMissionComplete);
+            }
+        }
+    }
+        // Start is called before the first frame update
     void Start()
     {
-        
+        parentItem = this.transform.parent.gameObject.GetComponent<SlotItem>();
     }
 
     // Update is called once per frame

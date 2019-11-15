@@ -19,11 +19,11 @@ public class CameraFollowPlayer : MonoBehaviour
 {
 
     public bool working = false;
-    
+    public int speed = 1;
     public Transform TargetObject;
     public float distanceFromObject = 6f;
     public StateCamera state;
-    
+    Transform temptrans;
 
     void Update()
     {
@@ -35,8 +35,14 @@ public class CameraFollowPlayer : MonoBehaviour
         if (!working)
             return;
 
-        transform.position = Vector3.Lerp(transform.position, TargetObject.position,Time.deltaTime);
-        transform.rotation = Quaternion.Lerp(transform.rotation, TargetObject.rotation, Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, TargetObject.position,Time.deltaTime* speed);
+        transform.rotation = Quaternion.Lerp(transform.rotation, TargetObject.rotation, Time.deltaTime* speed);
+        float dis = Vector3.Distance(transform.position, TargetObject.position);
+        if (temptrans != TargetObject && dis <= 1.0f)
+        {
+            temptrans = TargetObject;
+            SceneManagement.GetInstance().VisibleBackButton(true);
+        }
     }
 
     Vector3 MovePosition(Transform Target)

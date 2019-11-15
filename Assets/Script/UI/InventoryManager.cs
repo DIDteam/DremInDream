@@ -31,6 +31,7 @@ public class InventoryManager : MonoBehaviour
             obj.GetComponent<SlotItem>().ID_Item = ItemID;
             //obj.transform.SetParent(this.gameObject.transform);
             SlotItemInventory.Add(obj);
+           
         }
         else
         {
@@ -39,7 +40,13 @@ public class InventoryManager : MonoBehaviour
     }
     public void RemoveItem(string ItemID)
     {
-        SlotItemInventory.Remove(GetItembyID(ItemID));
+        GameObject item = GetItembyID(ItemID);
+        if (item != null)
+        {
+            int index = SlotItemInventory.IndexOf(item);
+            SlotItemInventory.RemoveAt(index);
+            Destroy(item);
+        }
     }
 
     private GameObject GetItembyID(string id)

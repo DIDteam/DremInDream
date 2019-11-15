@@ -17,11 +17,11 @@ public class ItemDropHandle : MonoBehaviour ,IDropHandler
             {
                 Debug.DrawRay(transform.position, hit.point, Color.green);
                 Debug.Log(hit.transform.gameObject);
-                ItemInteractiveGame Item = hit.transform.gameObject.GetComponent<ItemInteractiveGame>();
-
+                MissionItemInterActive Item = hit.transform.gameObject.GetComponent<MissionItemInterActive>();
+              
                 if (Item)
                 {
-
+                    Debug.Log(Item.name);
                 }
             }
         }
