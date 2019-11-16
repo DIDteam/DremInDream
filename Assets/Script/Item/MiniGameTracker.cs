@@ -14,6 +14,7 @@ public class MiniGameTracker : MonoBehaviour
     [Header("--Mini Game Setting--")]
     public string ID_MiniGame;
     public MiniGameTable.Row GameData;
+    public List<ItemsTable.Row> ListFindItems;
 
     [Header("--Step Camera Setting--")]
     public MiniGameTracker BackStepCamera;
@@ -21,6 +22,9 @@ public class MiniGameTracker : MonoBehaviour
 
     MiniGameTable Table = new MiniGameTable();
     TextAsset File;
+    ItemsTable TableItem = new ItemsTable();
+    TextAsset FileItem;
+
     private void Awake()
     {
         StreamReader reader = new StreamReader("Assets/CSV/MiniGame.csv");
@@ -28,7 +32,25 @@ public class MiniGameTracker : MonoBehaviour
         Table.Load(File);
         Debug.Log(File.text);
         GameData = Table.Find_ID(ID_MiniGame);
+
+        StreamReader readerItem = new StreamReader("Assets/CSV/AllItems.csv");
+        FileItem = new TextAsset(readerItem.ReadToEnd());
+        TableItem.Load(FileItem);
+        foreach (string id in GameData.FindItem)
+        {
+            ListFindItems.Add(TableItem.Find_ID(id));
+        }
         reader.Close();
+        readerItem.Close();
+
+        if(GameData.FindItem.Count > 0)
+        {
+            if (GameData.FindItem[0] == null || GameData.FindItem[0] == "")
+            {
+                GameData.FindItem.Clear();
+                ListFindItems.Clear();
+            }
+        }
     }
     void Start()
     {

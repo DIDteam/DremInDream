@@ -59,7 +59,9 @@ public class SceneManagement : MonoBehaviour
 
                 if (obj.GetComponent<ItemInteractiveGame>() && CameraPlayer.state == StateCamera.MiniGame)
                 {
-                    KeepItemtoInventory(obj.GetComponent<ItemInteractiveGame>());
+                    ItemInteractiveGame item = obj.GetComponent<ItemInteractiveGame>();
+                    KeepItemtoInventory(item);
+                    FindItemManager.GetInstance().UpdateFindItem(item.ID_Item);
                 }
                 else if (obj.GetComponent<MiniGameTracker>() )
                 {
@@ -75,14 +77,15 @@ public class SceneManagement : MonoBehaviour
                     {
                         CurrentMiniGame = obj.GetComponent<MiniGameTracker>();
 
-                        if (CurrentMiniGame.NextStepCamera.Length > 1)
-                            GameManagement.GetInstance().SubCollisionActive(true);
-                        else
-                            GameManagement.GetInstance().SubCollisionActive(false);
+                        //if (CurrentMiniGame.NextStepCamera.Length > 1)
+                        //    GameManagement.GetInstance().SubCollisionActive(true);
+                        //else
+                        //    GameManagement.GetInstance().SubCollisionActive(false);
 
                         CameraPlayer.SetStateCamera(StateCamera.MiniGame);
                         CameraPlayer.SetTargetCamera(CurrentMiniGame.TrckerCamera.transform);
                     }
+                    FindItemManager.GetInstance().SetListFindItem(CurrentMiniGame.ListFindItems);
                     VisibleBackButton(false);
                 }
                 //hit.transform.position += Vector3.right * speed * Time.deltaTime; // << declare public speed and set it in inspector
@@ -139,10 +142,10 @@ public class SceneManagement : MonoBehaviour
                 CameraPlayer.SetTargetCamera(CurrentMiniGame.BackStepCamera.TrckerCamera.transform);
                 CurrentMiniGame = CurrentMiniGame.BackStepCamera;
 
-                if (CurrentMiniGame.NextStepCamera.Length > 1)
-                    GameManagement.GetInstance().SubCollisionActive(true);
-                else
-                    GameManagement.GetInstance().SubCollisionActive(false);
+                //if (CurrentMiniGame.NextStepCamera.Length > 1)
+                //    GameManagement.GetInstance().SubCollisionActive(true);
+                //else
+                //    GameManagement.GetInstance().SubCollisionActive(false);
             }
             else
             {
@@ -151,6 +154,8 @@ public class SceneManagement : MonoBehaviour
                 GameManagement.GetInstance().MainCollisionActive(true);
                 CameraPlayer.SetStateCamera(StateCamera.GameManager);
                 CameraPlayer.SetTargetCamera(GameManager.transform);
+                FindItemManager.GetInstance().DestroyListItems();
+                CurrentMiniGame = null;
             }
         }
         else if (CameraPlayer.state == StateCamera.GameManager)
