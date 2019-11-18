@@ -59,7 +59,13 @@ public class SceneManagement : MonoBehaviour
 
                 if (obj.GetComponent<ItemInteractiveGame>() && CameraPlayer.state == StateCamera.MiniGame)
                 {
-                    KeepItemtoInventory(obj.GetComponent<ItemInteractiveGame>());
+                    ItemInteractiveGame item = obj.GetComponent<ItemInteractiveGame>();
+                    KeepItemtoInventory(item);
+                    FindItemManager.GetInstance().UpdateFindItem(item.ID_Item);
+                    if (FindItemManager.GetInstance().FindItemAllComplete())
+                    {
+                        CurrentMiniGame.GetRewardItem();
+                    }
                 }
                 else if (obj.GetComponent<MiniGameTracker>() )
                 {
@@ -75,14 +81,19 @@ public class SceneManagement : MonoBehaviour
                     {
                         CurrentMiniGame = obj.GetComponent<MiniGameTracker>();
 
-                        if (CurrentMiniGame.NextStepCamera.Length > 1)
-                            GameManagement.GetInstance().SubCollisionActive(true);
-                        else
-                            GameManagement.GetInstance().SubCollisionActive(false);
+                        //if (CurrentMiniGame.NextStepCamera.Length > 1)
+                        //    GameManagement.GetInstance().SubCollisionActive(true);
+                        //else
+                        //    GameManagement.GetInstance().SubCollisionActive(false);
 
                         CameraPlayer.SetStateCamera(StateCamera.MiniGame);
                         CameraPlayer.SetTargetCamera(CurrentMiniGame.TrckerCamera.transform);
                     }
+
+                    if(CurrentMiniGame.IsComplete == false)
+                        FindItemManager.GetInstance().SetListFindItem(CurrentMiniGame.ListFindItems);
+
+                    UIManager.GetInstance().SetVisibleFindItemBar(true);
                     VisibleBackButton(false);
                 }
                 //hit.transform.position += Vector3.right * speed * Time.deltaTime; // << declare public speed and set it in inspector
@@ -91,7 +102,6 @@ public class SceneManagement : MonoBehaviour
         else if (!CanClick && Input.GetMouseButtonUp(0))
             CanClick = true;
     }
-
     public void KeepItemtoInventory(ItemInteractiveGame Item)
     {
         Debug.Log("You selected the " + Item.GameData.Name);
@@ -99,14 +109,12 @@ public class SceneManagement : MonoBehaviour
         InventoryManager.GetInstance().AddItem(Item.ID_Item);
         Destroy(Item.gameObject);
     }
-
     public void DropItemformInventory(string ItemID)
     {
         Debug.Log("You Drop Item : " + ItemID);
         PlayerData.Inventory.Remove(ItemID);
         InventoryManager.GetInstance().RemoveItem(ItemID);
     }
-
     static public SceneManagement GetInstance()
     {
         return (SceneManagement)FindObjectOfType(typeof(SceneManagement));
@@ -117,7 +125,6 @@ public class SceneManagement : MonoBehaviour
         CameraPlayer.SetTargetCamera(GameManager.transform);
         GameRunning = true;
     }
-
     public void VisibleBackButton(bool v)
     {
         if (CameraPlayer.state != StateCamera.GameManager)
@@ -134,23 +141,27 @@ public class SceneManagement : MonoBehaviour
         {
             if (CurrentMiniGame.BackStepCamera != null)
             {
+                UIManager.GetInstance().SetVisibleFindItemBar(false);
                 Debug.Log("BackButton : BackStepCamera");
                 CurrentMiniGame.GetComponent<BoxCollider>().enabled = true;
                 CameraPlayer.SetTargetCamera(CurrentMiniGame.BackStepCamera.TrckerCamera.transform);
                 CurrentMiniGame = CurrentMiniGame.BackStepCamera;
-
-                if (CurrentMiniGame.NextStepCamera.Length > 1)
-                    GameManagement.GetInstance().SubCollisionActive(true);
-                else
-                    GameManagement.GetInstance().SubCollisionActive(false);
+                UIManager.GetInstance().SetVisibleFindItemBar(true);
+                //if (CurrentMiniGame.NextStepCamera.Length > 1)
+                //    GameManagement.GetInstance().SubCollisionActive(true);
+                //else
+                //    GameManagement.GetInstance().SubCollisionActive(false);
             }
             else
             {
+                UIManager.GetInstance().SetVisibleFindItemBar(false);
                 Debug.Log("You Drop Item : BackStepCamera null ");
                 BackButton_UI.SetActive(false);
                 GameManagement.GetInstance().MainCollisionActive(true);
                 CameraPlayer.SetStateCamera(StateCamera.GameManager);
                 CameraPlayer.SetTargetCamera(GameManager.transform);
+                FindItemManager.GetInstance().DestroyListItems();
+                CurrentMiniGame = null;
             }
         }
         else if (CameraPlayer.state == StateCamera.GameManager)
@@ -158,5 +169,5 @@ public class SceneManagement : MonoBehaviour
             Debug.Log("BackButton : GameManager");
         }
     }
-
+ 
 }

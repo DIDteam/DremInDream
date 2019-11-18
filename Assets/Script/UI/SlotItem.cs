@@ -33,15 +33,17 @@ public class SlotItem : MonoBehaviour
         Debug.Log(FileAsset.text);
         GameData = Table.Find_ID(ID_Item);
         reader.Close();
-
+        TextName.text = ID_Item;
         if (GameData.ImagePath != "")
         {
-            Texture2D sprites = Resources.Load<Texture2D>(GameData.ImagePath);
+            Texture2D sprites = Resources.Load(GameData.ImagePath) as Texture2D;
+            Debug.Log(sprites + "--" + GameData.ImagePath);
             Rect rec = new Rect(0, 0, sprites.width, sprites.height);
             Sprite.Create(sprites, rec, new Vector2(0, 0), 1);
             IMG.sprite = Sprite.Create(sprites, rec, new Vector2(0, 0), .01f);
+            TextName.gameObject.SetActive(false);
         }
-        TextName.text = ID_Item;
+        
     }
 
     // Update is called once per frame
