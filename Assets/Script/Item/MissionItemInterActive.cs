@@ -1,15 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class MissionItemInterActive : MonoBehaviour
 {
     public string ItemMissionComplete;
     public GameObject ItemActive;
+    public string ItemRewardID;
+    public ItemsTable.Row DataReward;
+    ItemsTable TableItem = new ItemsTable();
+    TextAsset FileItem;
     // Start is called before the first frame update
     void Start()
     {
-
+        StreamReader readerItem = new StreamReader("Assets/CSV/AllItems.csv");
+        FileItem = new TextAsset(readerItem.ReadToEnd());
+        TableItem.Load(FileItem);
+        DataReward = TableItem.Find_ID(ItemRewardID);
+        readerItem.Close();
     }
 
     // Update is called once per frame
@@ -33,7 +42,8 @@ public class MissionItemInterActive : MonoBehaviour
             if (ItemActive.GetComponent<AnimateGetItem>())
             {
                 Debug.Log("Animation ActiveEvent");
-                ItemActive.GetComponent<AnimateGetItem>().ActiveAnimateGetItem();
+                ItemActive.GetComponent<AnimateGetItem>().ActiveAnimateGetItem(DataReward.ImagePath);
+                InventoryManager.GetInstance().AddItem(DataReward.ID);
             }
             else if (ItemActive.activeSelf == false)
             {

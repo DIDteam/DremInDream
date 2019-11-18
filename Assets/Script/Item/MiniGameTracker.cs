@@ -12,10 +12,12 @@ public class MiniGameTracker : MonoBehaviour
     //GameObject E_ui;
     //Image E_UIimg;
     [Header("--Mini Game Setting--")]
+    public bool IsComplete = false;
     public string ID_MiniGame;
     public MiniGameTable.Row GameData;
     public List<ItemsTable.Row> ListFindItems;
-
+    public List<string> TempIdFindItem;
+    ItemsTable.Row RewardItemData;
     [Header("--Step Camera Setting--")]
     public MiniGameTracker BackStepCamera;
     public MiniGameTracker[] NextStepCamera;
@@ -40,6 +42,8 @@ public class MiniGameTracker : MonoBehaviour
         {
             ListFindItems.Add(TableItem.Find_ID(id));
         }
+        RewardItemData = TableItem.Find_ID(GameData.Reward);
+
         reader.Close();
         readerItem.Close();
 
@@ -63,5 +67,18 @@ public class MiniGameTracker : MonoBehaviour
 
     }
 
+    public void GetRewardItem()
+    {
+        IsComplete = true;
+        Debug.Log(RewardItemData);
+        UIManager.GetInstance().GetRewardUI(RewardItemData.ImagePath);
+
+        foreach (string id in GameData.FindItem)
+        {
+            SceneManagement.GetInstance().DropItemformInventory(id);
+        }
+        InventoryManager.GetInstance().AddItem(GameData.Reward);
+        
+    }
 
 }

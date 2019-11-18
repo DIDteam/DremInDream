@@ -24,6 +24,19 @@ public class FindItemManager : MonoBehaviour
         return (FindItemManager)FindObjectOfType(typeof(FindItemManager));
     }
 
+    public bool FindItemAllComplete()
+    {
+        foreach (FindItemControl item in FindItems)
+        {
+            if (item.MaskText.activeSelf == false)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public void SetListFindItem(List<ItemsTable.Row> ListFindItem)
     {
 

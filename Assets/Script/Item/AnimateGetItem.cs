@@ -17,8 +17,18 @@ public class AnimateGetItem : MonoBehaviour
         
     }
 
-    public void ActiveAnimateGetItem()
+    public void ActiveAnimateGetItem(string path)
     {
-        AnimControl.SetBool("Open",true);
+        StartCoroutine(PlayAnimation(path));
+       
+        
+    }
+
+    IEnumerator PlayAnimation(string path)
+    {
+        AnimControl.SetBool("Open", true);
+        yield return new WaitForSeconds(2);
+        UIManager.GetInstance().GetRewardUI(path);
+
     }
 }

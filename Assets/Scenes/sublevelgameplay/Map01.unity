@@ -2774,13 +2774,18 @@ PrefabInstance:
     - target: {fileID: 1804812338372276027, guid: eeb5db56c4c009c4eb4e9c71b39ae4a6,
         type: 3}
       propertyPath: ItemMissionComplete
-      value: ITEM004
+      value: ITEM002
       objectReference: {fileID: 0}
     - target: {fileID: 1804812338372276027, guid: eeb5db56c4c009c4eb4e9c71b39ae4a6,
         type: 3}
       propertyPath: ItemActive
       value: 
       objectReference: {fileID: 1151576727}
+    - target: {fileID: 1804812338372276027, guid: eeb5db56c4c009c4eb4e9c71b39ae4a6,
+        type: 3}
+      propertyPath: ItemRewardID
+      value: ITEM017
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eeb5db56c4c009c4eb4e9c71b39ae4a6, type: 3}
 --- !u!1001 &1416540185
