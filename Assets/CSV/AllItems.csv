@@ -17,7 +17,7 @@ ITEM015,gamejoy,,
 ITEM016,ball,,
 ITEM017,award,model\(1)_box\award.fbx,UI\item\award
 ITEM018,staircase_good,model\(1)_box\staircase_good.fbx,UI\item\staircase_good
-ITEM019,dollbear,model\(1)_box\dollbear.fbx,UI\item\dollbear
+ITEM019,dollbear,,UI\item\dollbear
 ITEM020,draw,model\(1)_box\draw.fbx,UI\item\draw
 ITEM21,dollgirl,model\on_bed\dollgirl,
 ITEM22,fabric,model\on_bed\fabric,
