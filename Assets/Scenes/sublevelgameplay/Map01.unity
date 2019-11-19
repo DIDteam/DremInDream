@@ -3360,6 +3360,11 @@ PrefabInstance:
       propertyPath: ID_MiniGame
       value: MN001
       objectReference: {fileID: 0}
+    - target: {fileID: 1989078893766849523, guid: 5d44cfb4315b259438e1b347038ed530,
+        type: 3}
+      propertyPath: cursurOver
+      value: 
+      objectReference: {fileID: 2800000, guid: c336541b12bda0144b9f375b1a90b3ac, type: 3}
     - target: {fileID: 5500472092253891258, guid: 5d44cfb4315b259438e1b347038ed530,
         type: 3}
       propertyPath: m_IsTrigger

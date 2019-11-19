@@ -22,6 +22,10 @@ public class MiniGameTracker : MonoBehaviour
     public MiniGameTracker BackStepCamera;
     public MiniGameTracker[] NextStepCamera;
 
+    [Header("--Mouse Setting--")]
+    public Texture2D cursurOver;
+    public CursorMode Cursormode = CursorMode.Auto;
+
     MiniGameTable Table = new MiniGameTable();
     TextAsset File;
     ItemsTable TableItem = new ItemsTable();

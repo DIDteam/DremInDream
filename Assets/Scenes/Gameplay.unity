@@ -339,11 +339,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 233691807}
   m_LocalRotation: {x: 0.109183855, y: -0, z: -0, w: 0.9940216}
-  m_LocalPosition: {x: -3.14, y: 6.532938, z: -43.09384}
-  m_LocalScale: {x: 0.0015663499, y: 0.0015663499, z: 0.0015663499}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &490964355
 GameObject:
@@ -717,7 +717,7 @@ RectTransform:
   - {fileID: 1613937872}
   - {fileID: 1100168560}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1013,6 +1013,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797589256}
   m_CullTransparentMesh: 0
+--- !u!1 &1849132184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1849132187}
+  - component: {fileID: 1849132185}
+  m_Layer: 0
+  m_Name: MouseCursur
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1849132185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849132184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93849c76e1fdf8c4aaec886dcaad8278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NormalMouse: {fileID: 2800000, guid: 476affc5b8344be47a9091ebbf63223c, type: 3}
+  KeepItem: {fileID: 10904, guid: 0000000000000000f000000000000000, type: 0}
+  ZoomGlass: {fileID: 2800000, guid: c336541b12bda0144b9f375b1a90b3ac, type: 3}
+--- !u!4 &1849132187
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849132184}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1858259427 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1748164873683897578, guid: 1b7542bf6253cf84c871b8226562ae69,

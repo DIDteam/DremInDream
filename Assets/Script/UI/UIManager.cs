@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
         AnimControl.SetBool("GetReward", true);
         yield return new WaitForSeconds(2);
         panalReaward.SetActive(false);
+        SetVisibleFindItemBar(false);
         AnimControl.SetBool("GetReward",false);
     }
     public void GetRewardUI(string pathItem)
