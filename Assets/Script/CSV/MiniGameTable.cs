@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
 public class MiniGameTable
 {
     [System.Serializable]
@@ -9,13 +10,15 @@ public class MiniGameTable
 	{
 		public string ID;
 		public List<string> FindItem;
+		public string MapName;
 		public string Reward;
 
 	}
 
 	List<Row> rowList = new List<Row>();
 	bool isLoaded = false;
-    public bool IsLoaded()
+
+	public bool IsLoaded()
 	{
 		return isLoaded;
 	}
@@ -32,9 +35,10 @@ public class MiniGameTable
 		for(int i = 1 ; i < grid.Length ; i++)
 		{
 			Row row = new Row();
-            row.ID = grid[i][0];
-            row.FindItem = new List<string>(grid[i][1].Split(","[0]));
-			row.Reward = grid[i][2];
+            row.FindItem = new List<string>(grid[i][2].Split(","[0]));
+			row.ID = grid[i][0];
+			row.MapName = grid[i][1];
+			row.Reward = grid[i][3];
 
 			rowList.Add(row);
 		}
@@ -66,11 +70,28 @@ public class MiniGameTable
 	{
         return rowList.Find(x => x.FindItem[(x.FindItem.IndexOf(find))] == find);
   	}
+
+    public Row Find_MapName(string find)
+    {
+		return rowList.Find(x => x.MapName == find);
+	}
+	public List<Row> FindAll_MapName(string find)
+	{
+		return rowList.FindAll(x => x.MapName == find);
+	}
+	//public Row Find_FindItem(string find)
+	//{
+	//	return rowList.Find(x => x.FindItem == find);
+	//}
+	//public List<Row> FindAll_FindItem(string find)
+	//{
+	//	return rowList.FindAll(x => x.FindItem == find);
+	//}
 	public Row Find_Reward(string find)
 	{
 		return rowList.Find(x => x.Reward == find);
-    }
-    public List<Row> FindAll_Reward(string find)
+	}
+	public List<Row> FindAll_Reward(string find)
 	{
 		return rowList.FindAll(x => x.Reward == find);
 	}

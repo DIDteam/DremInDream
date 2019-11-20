@@ -77,9 +77,9 @@ public class MiniGameTracker : MonoBehaviour
         Debug.Log(RewardItemData);
         UIManager.GetInstance().GetRewardUI(RewardItemData.ImagePath);
 
-        foreach (string id in GameData.FindItem)
+        foreach (var id in GameData.FindItem)
         {
-            SceneManagement.GetInstance().DropItemformInventory(id);
+            SceneManagement.GetInstance().DropItemformInventory(id.ToString());
         }
         InventoryManager.GetInstance().AddItem(GameData.Reward);
         
