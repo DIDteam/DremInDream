@@ -489,15 +489,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: cd92115feb0879b46a705077a14ca7fd, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -629,8 +629,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 36524f3093e652c4f9c8d54c56fc610a, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1362,7 +1362,7 @@ PrefabInstance:
     - target: {fileID: 647079148703891544, guid: 392bcc7f32a5e204190bd89fc2dbd177,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 647079148703891544, guid: 392bcc7f32a5e204190bd89fc2dbd177,
         type: 3}
@@ -1403,6 +1403,37 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 647079148703891544, guid: 392bcc7f32a5e204190bd89fc2dbd177,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0027546
+      objectReference: {fileID: 0}
+    - target: {fileID: 647079148703891544, guid: 392bcc7f32a5e204190bd89fc2dbd177,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2783687
+      objectReference: {fileID: 0}
+    - target: {fileID: 647079148703891544, guid: 392bcc7f32a5e204190bd89fc2dbd177,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.0412712
+      objectReference: {fileID: 0}
+    - target: {fileID: 647079148703891547, guid: 392bcc7f32a5e204190bd89fc2dbd177,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8c2ff714e974ef6438ff163196c47ec8,
+        type: 3}
+    - target: {fileID: 647079148703891547, guid: 392bcc7f32a5e204190bd89fc2dbd177,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 647079148703891547, guid: 392bcc7f32a5e204190bd89fc2dbd177,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 647079149145089407, guid: 392bcc7f32a5e204190bd89fc2dbd177,
         type: 3}
@@ -1548,6 +1579,29 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 663519278288206483, guid: c141c381b55c09f45a6cc817dbb68b48,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 663519277871487479, guid: c141c381b55c09f45a6cc817dbb68b48,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fdc939f131eb06e44b0b1c54c57beb07,
+        type: 3}
+    - target: {fileID: 663519278288206484, guid: c141c381b55c09f45a6cc817dbb68b48,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b558cd8d2ff386c44848b2010d9b3c16,
+        type: 3}
+    - target: {fileID: 2024449087018728640, guid: c141c381b55c09f45a6cc817dbb68b48,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: af93aaaf0426d0a42b91ac6881c84d5b,
+        type: 3}
     - target: {fileID: 5065991747742408373, guid: c141c381b55c09f45a6cc817dbb68b48,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1815,11 +1869,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneManagement
       objectReference: {fileID: 0}
-    - target: {fileID: 4380770211528247778, guid: b45abd66f3eaf864ca60630605fe7a05,
-        type: 3}
-      propertyPath: BackButton_UI
-      value: 
-      objectReference: {fileID: 1797589256}
     - target: {fileID: 4380770211528247789, guid: b45abd66f3eaf864ca60630605fe7a05,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1875,5 +1924,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4380770211528247778, guid: b45abd66f3eaf864ca60630605fe7a05,
+        type: 3}
+      propertyPath: BackButton_UI
+      value: 
+      objectReference: {fileID: 1797589256}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b45abd66f3eaf864ca60630605fe7a05, type: 3}
