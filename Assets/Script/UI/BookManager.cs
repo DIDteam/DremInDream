@@ -70,11 +70,13 @@ public class BookManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!Panel.activeSelf)
+            return;
         if (CurrentPage < ListBook.Count && CurrentPage >=0 )
         {
             LeftPage.SetActive(true);
             LeftTopicText.text = ListBook[CurrentPage].Mapname;
-            Debug.Log(ListBook[CurrentPage].IDItem);
+            //Debug.Log(ListBook[CurrentPage].IDItem);
             //string pathL = TableItem.Find_ID(ListBook[CurrentPage].IDItem).ImagePath;
             //Texture2D spritesL = Resources.Load(pathL) as Texture2D;
             //Rect recL = new Rect(0, 0, spritesL.width, spritesL.height);
@@ -93,7 +95,7 @@ public class BookManager : MonoBehaviour
         {
             RightPage.SetActive(true);
             RightTopicText.text = ListBook[CurrentPage + 1].Mapname;
-            Debug.Log(ListBook[CurrentPage + 1].IDItem);
+            //Debug.Log(ListBook[CurrentPage + 1].IDItem);
             //string pathR = TableItem.Find_ID(ListBook[CurrentPage + 1].IDItem).ImagePath;
             //Texture2D spritesR = Resources.Load(pathR) as Texture2D;
             //Rect recR = new Rect(0, 0, spritesR.width, spritesR.height);

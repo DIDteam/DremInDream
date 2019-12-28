@@ -20,11 +20,13 @@ public class SceneManagement : MonoBehaviour
     public bool GamePause = false;
     public bool CanClick =false;
 
+    Transform TempRotation;
     void Start()
     {
         PlayerData = SaveSystem.LoadSaveGame();
         //playerstartpoint = GameObject.Find("PlayerStartPoint").GetComponent<PlayerStartPoint>();
         //FirstFocus = GameObject.Find("FirstFocusCamera").GetComponent<Transform>();
+        
         CameraPlayer = GameObject.Find("Main Camera").GetComponent<CameraFollowPlayer>();
         GameManager = GameManagement.GetInstance();
         //playerstartpoint.SpawnPlayer();
@@ -69,28 +71,23 @@ public class SceneManagement : MonoBehaviour
                 }
                 else if (obj.GetComponent<MiniGameTracker>() )
                 {
-                    
+                    CurrentMiniGame.Lighting.SetActive(false);
                     if (CameraPlayer.state == StateCamera.GameManager)
-                    {
+                    {   
                         CurrentMiniGame = obj.GetComponent<MiniGameTracker>();
-                        GameManagement.GetInstance().MainCollisionActive(false);
-                        CameraPlayer.SetStateCamera(StateCamera.MiniGame);
+                        //GameManagement.GetInstance().MainCollisionActive(false);
+                        CameraPlayer.SetStateCamera(Quaternion.Euler(CurrentMiniGame.CameraPosition));
                         CameraPlayer.SetTargetCamera(obj.GetComponent<MiniGameTracker>().TrckerCamera.transform);
                     }
                     else if(CameraPlayer.state == StateCamera.MiniGame)
                     {
                         CurrentMiniGame = obj.GetComponent<MiniGameTracker>();
 
-                        //if (CurrentMiniGame.NextStepCamera.Length > 1)
-                        //    GameManagement.GetInstance().SubCollisionActive(true);
-                        //else
-                        //    GameManagement.GetInstance().SubCollisionActive(false);
-
-                        CameraPlayer.SetStateCamera(StateCamera.MiniGame);
+                        CameraPlayer.SetStateCamera(Quaternion.Euler(CurrentMiniGame.CameraPosition));
                         CameraPlayer.SetTargetCamera(CurrentMiniGame.TrckerCamera.transform);
                     }
-
-                    if(CurrentMiniGame.IsComplete == false)
+                    CurrentMiniGame.Lighting.SetActive(true);
+                    if (CurrentMiniGame.IsComplete == false)
                         FindItemManager.GetInstance().SetListFindItem(CurrentMiniGame.ListFindItems);
 
                     UIManager.GetInstance().SetVisibleFindItemBar(true);
@@ -122,7 +119,9 @@ public class SceneManagement : MonoBehaviour
     IEnumerator SetupGame()
     {
         yield return new WaitForSeconds(2.0f);
-        CameraPlayer.SetTargetCamera(GameManager.transform);
+        CurrentMiniGame = GameManager.MainListGame[0];
+        GameManager.MainListGame[0].Lighting.SetActive(true);
+        CameraPlayer.SetStateCamera(Quaternion.Euler(GameManager.MainListGame[0].CameraPosition));
         GameRunning = true;
     }
     public void VisibleBackButton(bool v)
@@ -139,7 +138,7 @@ public class SceneManagement : MonoBehaviour
         VisibleBackButton(false);
         if (CameraPlayer.state == StateCamera.MiniGame)
         {
-            if (CurrentMiniGame.BackStepCamera != null)
+            /*if (CurrentMiniGame.BackStepCamera != null)
             {
                 UIManager.GetInstance().SetVisibleFindItemBar(false);
                 Debug.Log("BackButton : BackStepCamera");
@@ -162,7 +161,7 @@ public class SceneManagement : MonoBehaviour
                 CameraPlayer.SetTargetCamera(GameManager.transform);
                 FindItemManager.GetInstance().DestroyListItems();
                 CurrentMiniGame = null;
-            }
+            }*/
         }
         else if (CameraPlayer.state == StateCamera.GameManager)
         {

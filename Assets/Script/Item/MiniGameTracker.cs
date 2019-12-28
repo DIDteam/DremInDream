@@ -19,9 +19,10 @@ public class MiniGameTracker : MonoBehaviour
     public List<string> TempIdFindItem;
     ItemsTable.Row RewardItemData;
     [Header("--Step Camera Setting--")]
-    public MiniGameTracker BackStepCamera;
-    public MiniGameTracker[] NextStepCamera;
-
+    public Vector3 CameraPosition;
+    public GameObject Lighting;
+    //public MiniGameTracker BackStepCamera;
+    //public MiniGameTracker[] NextStepCamera;
     [Header("--Mouse Setting--")]
     public Texture2D cursurOver;
     public CursorMode Cursormode = CursorMode.Auto;

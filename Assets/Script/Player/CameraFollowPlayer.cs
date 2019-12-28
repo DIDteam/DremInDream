@@ -23,26 +23,32 @@ public class CameraFollowPlayer : MonoBehaviour
     public Transform TargetObject;
     public float distanceFromObject = 6f;
     public StateCamera state;
+    public GameObject RootCamera;
     Transform temptrans;
-
+    Quaternion MovetoCamera ;
+    void Start()
+    {
+        RootCamera = GameObject.Find("RootCamera").gameObject;
+    }
     void Update()
     {
-        if(!working && TargetObject != null)
+        /*if(!working && TargetObject != null)
         {
             working = true;
-        }
+        }*/
 
         if (!working)
             return;
 
-        transform.position = Vector3.Lerp(transform.position, TargetObject.position,Time.deltaTime* speed);
+        RootCamera.transform.rotation = Quaternion.Lerp(RootCamera.transform.rotation, MovetoCamera, Time.deltaTime * speed);
+        /*transform.position = Vector3.Lerp(transform.position, TargetObject.position,Time.deltaTime* speed);
         transform.rotation = Quaternion.Lerp(transform.rotation, TargetObject.rotation, Time.deltaTime* speed);
         float dis = Vector3.Distance(transform.position, TargetObject.position);
         if (temptrans != TargetObject && dis <= 1.0f)
         {
             temptrans = TargetObject;
             SceneManagement.GetInstance().VisibleBackButton(true);
-        }
+        }*/
     }
 
     Vector3 MovePosition(Transform Target)
@@ -59,9 +65,11 @@ public class CameraFollowPlayer : MonoBehaviour
         TargetObject = trans;
     }
     
-    public void SetStateCamera(StateCamera newstate)
+    public void SetStateCamera(Quaternion newRotation)
     {
-        state = newstate;
+        working = (MovetoCamera != newRotation);
+        Debug.Log(working);
+        MovetoCamera = newRotation;
     }
     
 }
