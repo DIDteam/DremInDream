@@ -26,6 +26,7 @@ public class CameraFollowPlayer : MonoBehaviour
     public GameObject RootCamera;
     Transform temptrans;
     Quaternion MovetoCamera ;
+    Quaternion TempMove;
     void Start()
     {
         RootCamera = GameObject.Find("RootCamera").gameObject;
@@ -70,6 +71,11 @@ public class CameraFollowPlayer : MonoBehaviour
         working = (MovetoCamera != newRotation);
         Debug.Log(working);
         MovetoCamera = newRotation;
+        TempMove = MovetoCamera;
     }
-    
+    public void SetCameraPuzzle()
+    {
+        MovetoCamera = Quaternion.Euler(new Vector3(-35,0,0));
+        working = true;
+    }
 }

@@ -9,6 +9,7 @@ public class SceneManagement : MonoBehaviour
     //public PlayerStartPoint playerstartpoint;
     private LayerMask LayerItem;
     public GameObject BackButton_UI;
+    public GameObject RootMap;
     public Transform FirstFocus;
     public CameraFollowPlayer CameraPlayer;
     //public GameObject player; 
@@ -19,7 +20,7 @@ public class SceneManagement : MonoBehaviour
     //public bool MiniGameActive = false;
     public bool GamePause = false;
     public bool CanClick =false;
-
+    public GameObject[] Smoke;
     Transform TempRotation;
     void Start()
     {
@@ -28,6 +29,8 @@ public class SceneManagement : MonoBehaviour
         //FirstFocus = GameObject.Find("FirstFocusCamera").GetComponent<Transform>();
         
         CameraPlayer = GameObject.Find("Main Camera").GetComponent<CameraFollowPlayer>();
+
+        RootMap = GameObject.Find("RootMap");
         GameManager = GameManagement.GetInstance();
         //playerstartpoint.SpawnPlayer();
         //player = playerstartpoint.player;
@@ -71,27 +74,20 @@ public class SceneManagement : MonoBehaviour
                 }
                 else if (obj.GetComponent<MiniGameTracker>() )
                 {
-                    CurrentMiniGame.Lighting.SetActive(false);
-                    if (CameraPlayer.state == StateCamera.GameManager)
-                    {   
-                        CurrentMiniGame = obj.GetComponent<MiniGameTracker>();
-                        //GameManagement.GetInstance().MainCollisionActive(false);
-                        CameraPlayer.SetStateCamera(Quaternion.Euler(CurrentMiniGame.CameraPosition));
-                        CameraPlayer.SetTargetCamera(obj.GetComponent<MiniGameTracker>().TrckerCamera.transform);
-                    }
-                    else if(CameraPlayer.state == StateCamera.MiniGame)
-                    {
-                        CurrentMiniGame = obj.GetComponent<MiniGameTracker>();
+                    if (!obj.GetComponent<MiniGameTracker>().IsPuzzleComplete && !obj.GetComponent<MiniGameTracker>().SpawnPuzzle) {
 
-                        CameraPlayer.SetStateCamera(Quaternion.Euler(CurrentMiniGame.CameraPosition));
-                        CameraPlayer.SetTargetCamera(CurrentMiniGame.TrckerCamera.transform);
+                        Debug.Log("Puzzle Start!");
+                        RootMap.SetActive(false);
+                        CameraPlayer.SetCameraPuzzle();
+                        UIManager.GetInstance().InventoryObject.SetActive(false);
+                        SetVisibleSmoke(false);
+                        obj.GetComponent<MiniGameTracker>().Puzzle.ParentMiniGame = obj;
+                        obj.GetComponent<MiniGameTracker>().SpawnPuzzle = true;
+                        obj.GetComponent<MiniGameTracker>().Puzzle.StartPuzzle();
                     }
-                    CurrentMiniGame.Lighting.SetActive(true);
-                    if (CurrentMiniGame.IsComplete == false)
-                        FindItemManager.GetInstance().SetListFindItem(CurrentMiniGame.ListFindItems);
-
-                    UIManager.GetInstance().SetVisibleFindItemBar(true);
-                    VisibleBackButton(false);
+                    else {
+                        PuzzleComplete(obj);
+                    }
                 }
                 //hit.transform.position += Vector3.right * speed * Time.deltaTime; // << declare public speed and set it in inspector
             }
@@ -169,4 +165,38 @@ public class SceneManagement : MonoBehaviour
         }
     }
  
+    public void PuzzleComplete(GameObject obj)
+    {
+        RootMap.SetActive(true);
+        UIManager.GetInstance().InventoryObject.SetActive(true);
+        obj.GetComponent<MiniGameTracker>().IsPuzzleComplete = true;
+        SetVisibleSmoke(true);
+        CurrentMiniGame.Lighting.SetActive(false);
+        if (CameraPlayer.state == StateCamera.GameManager)
+        {
+            CurrentMiniGame = obj.GetComponent<MiniGameTracker>();
+            //GameManagement.GetInstance().MainCollisionActive(false);
+            CameraPlayer.SetStateCamera(Quaternion.Euler(CurrentMiniGame.CameraPosition));
+            CameraPlayer.SetTargetCamera(obj.GetComponent<MiniGameTracker>().TrckerCamera.transform);
+        }
+        else if (CameraPlayer.state == StateCamera.MiniGame)
+        {
+            CurrentMiniGame = obj.GetComponent<MiniGameTracker>();
+            CameraPlayer.SetStateCamera(Quaternion.Euler(CurrentMiniGame.CameraPosition));
+            CameraPlayer.SetTargetCamera(CurrentMiniGame.TrckerCamera.transform);
+        }
+        CurrentMiniGame.Lighting.SetActive(true);
+        if (CurrentMiniGame.IsComplete == false)
+            FindItemManager.GetInstance().SetListFindItem(CurrentMiniGame.ListFindItems);
+        UIManager.GetInstance().SetVisibleFindItemBar(true);
+        VisibleBackButton(false);
+    }
+
+    public void SetVisibleSmoke(bool v)
+    {
+        foreach(GameObject item in Smoke)
+        {
+            item.SetActive(v);
+        }
+    }
 }

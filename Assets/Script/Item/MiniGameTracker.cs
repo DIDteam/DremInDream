@@ -13,11 +13,15 @@ public class MiniGameTracker : MonoBehaviour
     //Image E_UIimg;
     [Header("--Mini Game Setting--")]
     public bool IsComplete = false;
+    public bool IsPuzzleComplete = false;
+    public bool SpawnPuzzle = false;
     public string ID_MiniGame;
     public MiniGameTable.Row GameData;
     public List<ItemsTable.Row> ListFindItems;
     public List<string> TempIdFindItem;
     ItemsTable.Row RewardItemData;
+    public string puzzlename;
+    public ST_PuzzleDisplay Puzzle;
     [Header("--Step Camera Setting--")]
     public Vector3 CameraPosition;
     public GameObject Lighting;
@@ -63,7 +67,8 @@ public class MiniGameTracker : MonoBehaviour
     }
     void Start()
     {
-        
+        if(!SpawnPuzzle)
+        Puzzle = GameObject.Find(puzzlename).GetComponent<ST_PuzzleDisplay>();
     }
 
     // Update is called once per frame

@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public Animator AnimControl;
     public GameObject panalReaward;
     public GameObject RewardObject;
+    public GameObject InventoryObject;
     // Start is called before the first frame update
     void Start()
     {
