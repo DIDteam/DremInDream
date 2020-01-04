@@ -62,7 +62,7 @@ public class SceneManagement : MonoBehaviour
                 //sDebug.Log(hit.transform.gameObject);
                 GameObject obj = hit.transform.gameObject;
 
-                if (obj.GetComponent<ItemInteractiveGame>() && CameraPlayer.state == StateCamera.MiniGame)
+                if (obj.GetComponent<ItemInteractiveGame>())
                 {
                     ItemInteractiveGame item = obj.GetComponent<ItemInteractiveGame>();
                     KeepItemtoInventory(item);
@@ -167,29 +167,24 @@ public class SceneManagement : MonoBehaviour
  
     public void PuzzleComplete(GameObject obj)
     {
+        CurrentMiniGame = obj.GetComponent<MiniGameTracker>();
         RootMap.SetActive(true);
         UIManager.GetInstance().InventoryObject.SetActive(true);
         obj.GetComponent<MiniGameTracker>().IsPuzzleComplete = true;
         SetVisibleSmoke(true);
         CurrentMiniGame.Lighting.SetActive(false);
-        if (CameraPlayer.state == StateCamera.GameManager)
-        {
-            CurrentMiniGame = obj.GetComponent<MiniGameTracker>();
+        CurrentMiniGame = obj.GetComponent<MiniGameTracker>();
             //GameManagement.GetInstance().MainCollisionActive(false);
-            CameraPlayer.SetStateCamera(Quaternion.Euler(CurrentMiniGame.CameraPosition));
-            CameraPlayer.SetTargetCamera(obj.GetComponent<MiniGameTracker>().TrckerCamera.transform);
-        }
-        else if (CameraPlayer.state == StateCamera.MiniGame)
-        {
-            CurrentMiniGame = obj.GetComponent<MiniGameTracker>();
-            CameraPlayer.SetStateCamera(Quaternion.Euler(CurrentMiniGame.CameraPosition));
-            CameraPlayer.SetTargetCamera(CurrentMiniGame.TrckerCamera.transform);
-        }
+            
+        CameraPlayer.SetStateCamera(Quaternion.Euler(CurrentMiniGame.CameraPosition));
+        CameraPlayer.SetTargetCamera(obj.GetComponent<MiniGameTracker>().TrckerCamera.transform);
+
+        UIManager.GetInstance().SetVisibleFindItemBar(true);
+        VisibleBackButton(false);
         CurrentMiniGame.Lighting.SetActive(true);
         if (CurrentMiniGame.IsComplete == false)
             FindItemManager.GetInstance().SetListFindItem(CurrentMiniGame.ListFindItems);
-        UIManager.GetInstance().SetVisibleFindItemBar(true);
-        VisibleBackButton(false);
+
     }
 
     public void SetVisibleSmoke(bool v)

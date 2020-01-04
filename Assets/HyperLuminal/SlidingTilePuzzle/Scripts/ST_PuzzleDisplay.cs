@@ -236,14 +236,20 @@ public class ST_PuzzleDisplay : MonoBehaviour
 		// if we are still complete then all the tiles are correct.
 		if(Complete)
 		{
-			Debug.Log("Puzzle Complete!");
-            SceneManagement.GetInstance().PuzzleComplete(ParentMiniGame);
-            Destroy(this.gameObject);
+            CompletePuzzle();
 		}
 
 		yield return null;
 	}
 
+   public void CompletePuzzle()
+    {
+        
+        Debug.Log("Puzzle Complete!");
+        GameObject.Destroy(this.gameObject);
+        SceneManagement.GetInstance().PuzzleComplete(ParentMiniGame);
+        
+    }
 	private Vector2 ConvertIndexToGrid(int index)
 	{
 		int WidthIndex = index;

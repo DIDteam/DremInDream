@@ -43,12 +43,16 @@ public class FindItemManager : MonoBehaviour
         DestroyListItems();
         foreach (ItemsTable.Row item in ListFindItem)
         {
+           
             GameObject obj = Instantiate(PrefabFinditem);
             obj.transform.SetParent(this.transform);
-            bool MaskVisible = SceneManagement.GetInstance().PlayerData.Inventory.Contains(item.ID);
-            obj.GetComponent<FindItemControl>().SetFindItemControl(item.ID, item.Name, MaskVisible);
+
+            Debug.Log(item.ID + "+---" + item.Name + "-->" );
             obj.GetComponent<RectTransform>().localScale = Vector3.one;
             FindItems.Add(obj.GetComponent<FindItemControl>());
+            bool MaskVisible = SceneManagement.GetInstance().PlayerData.Inventory.Contains(item.ID);
+            Debug.Log(item.ID + "+---" + item.Name + "-->" + MaskVisible);
+            obj.GetComponent<FindItemControl>().SetFindItemControl(item.ID, item.Name, MaskVisible);
         }
     }
     public void UpdateFindItem(string ID)
