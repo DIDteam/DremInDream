@@ -74,8 +74,10 @@ public class SceneManagement : MonoBehaviour
                 }
                 else if (obj.GetComponent<MiniGameTracker>() )
                 {
-                    if (!obj.GetComponent<MiniGameTracker>().IsPuzzleComplete && !obj.GetComponent<MiniGameTracker>().SpawnPuzzle) {
-
+                    if (!obj.GetComponent<MiniGameTracker>().IsPuzzleComplete && 
+                        !obj.GetComponent<MiniGameTracker>().SpawnPuzzle &&
+                        CurrentMiniGame.IsComplete)    
+                    {
                         Debug.Log("Puzzle Start!");
                         RootMap.SetActive(false);
                         CameraPlayer.SetCameraPuzzle();
@@ -85,8 +87,12 @@ public class SceneManagement : MonoBehaviour
                         obj.GetComponent<MiniGameTracker>().SpawnPuzzle = true;
                         obj.GetComponent<MiniGameTracker>().Puzzle.StartPuzzle();
                     }
-                    else {
+                    else if (CurrentMiniGame.IsComplete)
+                    {
                         PuzzleComplete(obj);
+                    }
+                    else{
+
                     }
                 }
                 //hit.transform.position += Vector3.right * speed * Time.deltaTime; // << declare public speed and set it in inspector
@@ -114,9 +120,9 @@ public class SceneManagement : MonoBehaviour
     }
     IEnumerator SetupGame()
     {
-        yield return new WaitForSeconds(2.0f);
-        CurrentMiniGame = GameManager.MainListGame[0];
-        GameManager.MainListGame[0].Lighting.SetActive(true);
+        yield return new WaitForSeconds(0.0f);
+
+        PuzzleComplete(GameManager.MainListGame[0].gameObject);
         CameraPlayer.SetStateCamera(Quaternion.Euler(GameManager.MainListGame[0].CameraPosition));
         GameRunning = true;
     }

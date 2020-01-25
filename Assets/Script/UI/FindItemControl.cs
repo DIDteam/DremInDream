@@ -23,7 +23,7 @@ public class FindItemControl : MonoBehaviour
     public void SetFindItemControl(string id, string name,bool MaskVisible)
     {
         FindItemID = id;
-        TextFindItem.text = name;
+        TextFindItem.text = name.ToUpperInvariant();
         MaskTextVisible(MaskVisible);
     }
     public void MaskTextVisible(bool Visible)

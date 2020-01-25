@@ -67,7 +67,7 @@ public class MiniGameTracker : MonoBehaviour
     }
     void Start()
     {
-        if(!SpawnPuzzle)
+        if(!SpawnPuzzle && puzzlename != "")
         Puzzle = GameObject.Find(puzzlename).GetComponent<ST_PuzzleDisplay>();
     }
 
