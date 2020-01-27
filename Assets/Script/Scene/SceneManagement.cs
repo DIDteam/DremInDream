@@ -78,6 +78,7 @@ public class SceneManagement : MonoBehaviour
                         !obj.GetComponent<MiniGameTracker>().SpawnPuzzle &&
                         CurrentMiniGame.IsComplete)    
                     {
+                        GameManager.SetVisibleLight(obj.GetComponent<MiniGameTracker>());
                         Debug.Log("Puzzle Start!");
                         RootMap.SetActive(false);
                         CameraPlayer.SetCameraPuzzle();
@@ -86,9 +87,12 @@ public class SceneManagement : MonoBehaviour
                         obj.GetComponent<MiniGameTracker>().Puzzle.ParentMiniGame = obj;
                         obj.GetComponent<MiniGameTracker>().SpawnPuzzle = true;
                         obj.GetComponent<MiniGameTracker>().Puzzle.StartPuzzle();
+                        UIManager.GetInstance().SetVisibleFindItemBar(false);
+                        Camera.main.orthographicSize = 6.5f;
                     }
                     else if (CurrentMiniGame.IsComplete)
                     {
+                        Camera.main.orthographicSize = 5.0f;
                         PuzzleComplete(obj);
                     }
                     else{
@@ -174,6 +178,7 @@ public class SceneManagement : MonoBehaviour
     public void PuzzleComplete(GameObject obj)
     {
         CurrentMiniGame = obj.GetComponent<MiniGameTracker>();
+        GameManager.SetVisibleLight(obj.GetComponent<MiniGameTracker>());
         RootMap.SetActive(true);
         UIManager.GetInstance().InventoryObject.SetActive(true);
         obj.GetComponent<MiniGameTracker>().IsPuzzleComplete = true;

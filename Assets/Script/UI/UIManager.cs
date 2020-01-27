@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     public Animator AnimControl;
     public GameObject panalReaward;
     public GameObject RewardObject;
     public GameObject InventoryObject;
+    public GameObject FinishPanel;
+    public List<GameObject> Star = new List<GameObject>();
+    public Text TextScore;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,5 +53,34 @@ public class UIManager : MonoBehaviour
     public void SetVisibleFindItemBar(bool Visible)
     {
         AnimControl.SetBool("FindItem", Visible);
+    }
+
+    public void FinishScore(float time)
+    {
+        int star = 0;
+        float min = time / 60.0f ;
+        FinishPanel.SetActive(true);
+        if (min<= 5.0f)
+            star = 3;
+        else if (min > 5.0f && min < 6.0f)
+            star = 2;
+        else if (min > 6.0f && min < 7.0f)
+            star = 1;
+        else 
+            star = 0;
+
+        for (int i = 0; i < star; i++)
+        {
+            Star[i].SetActive(true);
+        }
+
+        int score = min < 5 ? 1000 : 1000 * (5 - ((int)min % 5) / 5);
+        TextScore.text = score.ToString();
+        AnimControl.SetBool("FinishPanel", true);
+    }
+
+   public void StartMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

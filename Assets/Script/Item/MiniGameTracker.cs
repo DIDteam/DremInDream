@@ -81,13 +81,13 @@ public class MiniGameTracker : MonoBehaviour
     {
         IsComplete = true;
         Debug.Log(RewardItemData);
-        UIManager.GetInstance().GetRewardUI(RewardItemData.ImagePath);
+        /*UIManager.GetInstance().GetRewardUI(RewardItemData.ImagePath);
 
         foreach (var id in GameData.FindItem)
         {
             SceneManagement.GetInstance().DropItemformInventory(id.ToString());
         }
-        InventoryManager.GetInstance().AddItem(GameData.Reward);
+        InventoryManager.GetInstance().AddItem(GameData.Reward);*/
         
     }
 
