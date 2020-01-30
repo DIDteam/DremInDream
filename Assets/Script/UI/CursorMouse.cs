@@ -18,6 +18,7 @@ public class CursorMouse : MonoBehaviour
     {
         //Vector3 cursurPos = Input.mousePosition;
         // this.transform.position = cursurPos;
+        this.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -25,7 +26,7 @@ public class CursorMouse : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 10000.0f))
         {
             GameObject obj = hit.transform.gameObject;
-
+            
             if (obj.GetComponent<ItemInteractiveGame>() && KeepItem != null)
             {
                 Cursor.SetCursor(KeepItem, Vector2.zero, CursorMode.Auto);
