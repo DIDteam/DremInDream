@@ -18,7 +18,7 @@ public class CursorMouse : MonoBehaviour
     {
         //Vector3 cursurPos = Input.mousePosition;
         // this.transform.position = cursurPos;
-        this.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        //this.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
