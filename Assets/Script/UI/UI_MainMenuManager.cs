@@ -7,6 +7,8 @@ public class UI_MainMenuManager : MonoBehaviour
 {
     public GameObject SettingObj;
     public GameObject RaodMap;
+
+    public bool CheckOpenSetting = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +31,15 @@ public class UI_MainMenuManager : MonoBehaviour
     public void SettingButton()
     {
         RaodMap.SetActive(false);
-        SettingObj.SetActive(true);
+        SettingObj.SetActive(true);     
+    }
+
+    public void CloseSettingButton()
+    {
+        if(SettingObj)
+        {
+            SettingObj.SetActive(false);
+        }
     }
     public void CloseButton()
     {
