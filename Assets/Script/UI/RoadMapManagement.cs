@@ -23,12 +23,12 @@ public class RoadMapManagement : MonoBehaviour
     }
     public void Map02Button()
     {
-        //SceneManager.LoadScene("Gameplay");
-        //SceneManager.LoadScene("Map01", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        SceneManager.LoadScene("Gameplay");
+        SceneManager.LoadScene("Map02", UnityEngine.SceneManagement.LoadSceneMode.Additive);
     }
     public void Map03Button()
     {
-        //SceneManager.LoadScene("Gameplay");
-        //SceneManager.LoadScene("Map01", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        SceneManager.LoadScene("Gameplay");
+        SceneManager.LoadScene("Map03", UnityEngine.SceneManagement.LoadSceneMode.Additive);
     }
 }
