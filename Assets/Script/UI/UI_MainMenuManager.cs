@@ -7,7 +7,7 @@ public class UI_MainMenuManager : MonoBehaviour
 {
     public GameObject SettingObj;
     public GameObject RaodMap;
-
+    public GameObject Dialogs;
     public bool CheckOpenSetting = false;
     // Start is called before the first frame update
     void Start()
@@ -23,10 +23,14 @@ public class UI_MainMenuManager : MonoBehaviour
     
     public void StartButton()
     {
-        RaodMap.SetActive(true);
-        SettingObj.SetActive(false);
-        // SceneManager.LoadScene("Gameplay");
-        //  SceneManager.LoadScene("Map01", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        // RaodMap.SetActive(true);
+        //SettingObj.SetActive(false);
+         SceneManager.LoadScene("Gameplay");
+         SceneManager.LoadScene("Map01", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+    }
+    public void DialogsButton()
+    {
+        Dialogs.SetActive(true);
     }
     public void SettingButton()
     {
@@ -49,5 +53,10 @@ public class UI_MainMenuManager : MonoBehaviour
     {
         RaodMap.SetActive(false);
         SettingObj.SetActive(false);
+    }
+
+    static public UI_MainMenuManager GetInstance()
+    {
+        return (UI_MainMenuManager)FindObjectOfType(typeof(UI_MainMenuManager));
     }
 }

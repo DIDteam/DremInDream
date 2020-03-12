@@ -33,23 +33,10 @@ public class CameraFollowPlayer : MonoBehaviour
     }
     void Update()
     {
-        /*if(!working && TargetObject != null)
-        {
-            working = true;
-        }*/
-
         if (!working)
             return;
 
         RootCamera.transform.rotation = Quaternion.Lerp(RootCamera.transform.rotation, MovetoCamera, Time.deltaTime * speed);
-        /*transform.position = Vector3.Lerp(transform.position, TargetObject.position,Time.deltaTime* speed);
-        transform.rotation = Quaternion.Lerp(transform.rotation, TargetObject.rotation, Time.deltaTime* speed);
-        float dis = Vector3.Distance(transform.position, TargetObject.position);
-        if (temptrans != TargetObject && dis <= 1.0f)
-        {
-            temptrans = TargetObject;
-            SceneManagement.GetInstance().VisibleBackButton(true);
-        }*/
     }
 
     Vector3 MovePosition(Transform Target)

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class SceneManagement : MonoBehaviour
 {
     //public PlayerStartPoint playerstartpoint;
@@ -22,12 +22,21 @@ public class SceneManagement : MonoBehaviour
     public bool CanClick =false;
     public GameObject[] Smoke;
     Transform TempRotation;
+
+    public AudioSource AudioSourceplay;
+    public AudioClip ClickAudio;
+    public AudioClip KeepItemAudio;
+
+    public bool bMap01 = false;
+    public bool bMap02 = false;
+    public bool bMap03 = false;
     void Start()
     {
         PlayerData = SaveSystem.LoadSaveGame();
+        AudioSourceplay = this.gameObject.GetComponent<AudioSource>();
         //playerstartpoint = GameObject.Find("PlayerStartPoint").GetComponent<PlayerStartPoint>();
         //FirstFocus = GameObject.Find("FirstFocusCamera").GetComponent<Transform>();
-        
+
         CameraPlayer = GameObject.Find("Main Camera").GetComponent<CameraFollowPlayer>();
 
         RootMap = GameObject.Find("RootMap");
@@ -35,13 +44,18 @@ public class SceneManagement : MonoBehaviour
         //playerstartpoint.SpawnPlayer();
         //player = playerstartpoint.player;
         StartCoroutine(SetupGame());
-       
+
+
     }
 
 
     // Update is called once per frame
     void Update()
     {
+
+        bMap01 = SceneManager.GetAllScenes()[1].name == "Map01";
+        bMap02 = SceneManager.GetAllScenes()[1].name == "Map02";
+        bMap03 = SceneManager.GetAllScenes()[1].name == "Map03";
         if (!GameRunning)
             return;
 
@@ -64,6 +78,8 @@ public class SceneManagement : MonoBehaviour
 
                 if (obj.GetComponent<ItemInteractiveGame>())
                 {
+                    AudioSourceplay.clip = KeepItemAudio;
+                    AudioSourceplay.Play();
                     ItemInteractiveGame item = obj.GetComponent<ItemInteractiveGame>();
                     KeepItemtoInventory(item);
                     FindItemManager.GetInstance().UpdateFindItem(item.ID_Item);
@@ -74,6 +90,8 @@ public class SceneManagement : MonoBehaviour
                 }
                 else if (obj.GetComponent<MiniGameTracker>() )
                 {
+                    AudioSourceplay.clip = ClickAudio;
+                    AudioSourceplay.Play();
                     if (!obj.GetComponent<MiniGameTracker>().IsPuzzleComplete && 
                         !obj.GetComponent<MiniGameTracker>().SpawnPuzzle &&
                         CurrentMiniGame.IsComplete)    
@@ -128,6 +146,7 @@ public class SceneManagement : MonoBehaviour
 
         PuzzleComplete(GameManager.MainListGame[0].gameObject);
         CameraPlayer.SetStateCamera(Quaternion.Euler(GameManager.MainListGame[0].CameraPosition));
+        CameraPlayer.working =true;
         GameRunning = true;
     }
     public void VisibleBackButton(bool v)

@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
     public GameObject RewardObject;
     public GameObject InventoryObject;
     public GameObject FinishPanel;
+    public DialogCutScene Dialogs;
+    public RoadMapManagement RoadMap;
     public List<GameObject> Star = new List<GameObject>();
     public Text TextScore;
     // Start is called before the first frame update
@@ -21,7 +23,6 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     static public UIManager GetInstance()
@@ -82,5 +83,11 @@ public class UIManager : MonoBehaviour
    public void StartMenu()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+    public void StartDiaologs()
+    {
+        Dialogs.gameObject.SetActive(true);
+        FinishPanel.SetActive(false);
+        Dialogs.SetDefluat();
     }
 }
