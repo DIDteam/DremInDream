@@ -88,6 +88,5 @@ public class UIManager : MonoBehaviour
     {
         Dialogs.gameObject.SetActive(true);
         FinishPanel.SetActive(false);
-        Dialogs.SetDefluat();
     }
 }
